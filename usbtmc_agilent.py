@@ -35,6 +35,13 @@ dev.write('INP2:LEV:AUTO OFF')
 dev.write('INP1:LEV .9') #measurement threshold level = 900 mV
 dev.write('INP2:LEV .9')
 
+#clear error list
+#dev.write('*CLS')
+
+#reset instrument to factory state
+#dev.write('*RST')
+
+
 
 #polling cycle
 while True:
