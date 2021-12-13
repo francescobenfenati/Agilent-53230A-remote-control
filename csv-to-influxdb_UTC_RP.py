@@ -64,7 +64,7 @@ def loadCsv(inputfilename, servername, user, password, dbname, metric,
         else:
             print('Creating database %s'%dbname)
             client.create_database(dbname)
-            client.create_retention_policy(name='monit',duration='4w',replication='1',database=dbname,default=True,shard_duration='1h')
+            client.create_retention_policy(name='monit',duration='1w',replication='1',database=dbname,default=True,shard_duration='1h')
     client.switch_user(user, password)
 
     # format tags and fields
