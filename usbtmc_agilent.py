@@ -1,8 +1,10 @@
 import usbtmc
 import time
 import pandas as pd
-import logging                                                         
-logging.basicConfig(filename='/Users/francescobenfenati/agilent/logs/logfile.log', filemode='a', format='%(message)s')
+import logging
+log_path='/Users/francescobenfenati/Agilent/Agilent-53230A-remote-control/logs/logfile.log'
+data_filename='/Users/francescobenfenati/Agilent/Agilent-53230A-remote-control/data/measurements_{}'
+logging.basicConfig(filename=log_path, filemode='a', format='%(message)s')
 THRESHOLD = 1*1e-6
 
 
@@ -10,7 +12,7 @@ THRESHOLD = 1*1e-6
 df=pd.DataFrame(columns=["time","delay(s)"])
 
 def write_data_into_file(dataframe):
-    filename="/Users/francescobenfenati/agilent/data/measurements_{}".format(int(time.time()))
+    filename=data_filename.format(int(time.time()))
     print("writing dataframe on file {}...".format(filename))
     dataframe.to_csv(filename, mode='a',index=False)
     print("Done!")
@@ -21,6 +23,18 @@ dev = usbtmc.Instrument(idVendor=0x0957,idProduct=0x1907)
 
 #get dev identity
 #print(dev.ask('*IDN?'))
+
+#configuring
+dev.write('CONF:TINT (@1),(@2)') #set time interval measurement between ch1-ch2
+dev.write('INP1:COUP DC') #DC coupling
+dev.write('INP2:COUP DC')
+dev.write('INP1:IMP 50') #impedance set to 50 ohm
+dev.write('INP2:IMP 50')
+dev.write('INP1:LEV:AUTO OFF')
+dev.write('INP2:LEV:AUTO OFF')
+dev.write('INP1:LEV .9') #measurement threshold level = 900 mV
+dev.write('INP2:LEV .9')
+
 
 #polling cycle
 while True:

@@ -3,13 +3,13 @@ import time
 rm=pyvisa.ResourceManager()
 import pandas as pd
 import logging
-logging.basicConfig(filename='/Users/francescobenfenati/agilent/logs/logfile.log', filemode='a', format='%(message)s')
+logging.basicConfig(filename='/Users/francescobenfenati/Agilent/Agilent-53230A-remote-control/logs/logfile.log', filemode='a', format='%(message)s')
 THRESHOLD = 1*1e-6
 
 df=pd.DataFrame(columns=["time","delay(s)"])
 
 def write_data_into_file(dataframe):
-    filename="/Users/francescobenfenati/agilent/data/measurements_{}".format(int(time.time()))
+    filename="/Users/francescobenfenati/Agilent/Agilent-53230A-remote-control/data/measurements_{}".format(int(time.time()))
     print("writing dataframe on file {}...".format(filename))
     dataframe.to_csv(filename, mode='a',index=False)
     print("Done!")
@@ -18,10 +18,10 @@ def write_data_into_file(dataframe):
 #does not show tcpip interface but nonetheless you can connect to it
 
 #usb interface
-#agilent=rm.open_resource('USB0::2391::6407::MY50002594::0::INSTR')
+agilent=rm.open_resource('USB0::2391::6407::MY50002594::0::INSTR')
 
 #ethernet interface
-agilent = rm.open_resource('TCPIP0::169.254.2.30::inst0::INSTR')
+#agilent = rm.open_resource('TCPIP0::169.254.2.30::inst0::INSTR')
 
 #agilent = rm.open_resource('TCPIP0::169.254.2.30::5025::SOCKET') #does not work
 #agilent = rm.open_resource('TCPIP0::A‐53230A‐00050.keysight.com::inst0::INSTR') #does not work
