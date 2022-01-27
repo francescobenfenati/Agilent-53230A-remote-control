@@ -9,7 +9,7 @@ THRESHOLD = 1*1e-6
 
 
 
-df=pd.DataFrame(columns=["time","delay(s)"])
+df=pd.DataFrame(columns=["time","delay_s"])
 
 def write_data_into_file(dataframe):
     filename=data_filename.format(int(time.time()))
