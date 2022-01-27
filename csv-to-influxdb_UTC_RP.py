@@ -57,8 +57,8 @@ def loadCsv(inputfilename, servername, user, password, dbname, metric,
         databases = client.get_list_database()
         databasesname=[]
         for database in databases:
-            for i in database:
-                databasesname.append(i)
+            for key,value in database.items():
+                databasesname.append(value)
         if dbname in databasesname:
             print('Database already existing, appending')
         else:
