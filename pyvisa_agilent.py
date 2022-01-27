@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(filename='/Users/francescobenfenati/Agilent/Agilent-53230A-remote-control/logs/logfile.log', filemode='a', format='%(message)s')
 THRESHOLD = 1*1e-6
 
-df=pd.DataFrame(columns=["time","delay(s)"])
+df=pd.DataFrame(columns=["time","delay_s"])
 
 def write_data_into_file(dataframe):
     filename="/Users/francescobenfenati/Agilent/Agilent-53230A-remote-control/data/measurements_{}".format(int(time.time()))
